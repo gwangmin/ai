@@ -28,145 +28,198 @@ class PreTrainedModelHelper:
         densenet169
         densenet201
     '''
-    def __init__(self, model_name, include_last_fc=True, input_shape=None):
+    def __init__(self, model_name, transfer=False, input_shape=None):
         '''
         Load pre-trained model.
         
         model_name: one of available models.
-        include_last_fc: whether to include the fully-connected layer at the top of the network. default True
-        input_shape: : Transfer learning input shape. Default None. https://keras.io/applications/
+        transfer: whether to transfer learning. if True, exclude the fully-connected layer at
+            the top of the network. default False
+        input_shape: : Transfer learning input shape. If None, default input shape. Default None. https://keras.io/applications/
         '''
         self.name = model_name
         # vgg16
         if model_name == 'vgg16':
             import keras.applications.vgg16 as vgg16
             self.lib = vgg16
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = vgg16.VGG16(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = vgg16.VGG16(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = vgg16.VGG16(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = vgg16.VGG16(include_top=(not transfer))
         # vgg 19
         elif model_name == 'vgg19':
             import keras.applications.vgg19 as vgg19
             self.lib = vgg19
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = vgg19.VGG19(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = vgg19.VGG19(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = vgg19.VGG19(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = vgg19.VGG19(include_top=(not transfer))
         # resnet50
         elif model_name == 'resnet50':
             import keras.applications.resnet50 as resnet50
             self.lib = resnet50
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = resnet50.ResNet50(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = resnet50.ResNet50(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = resnet50.ResNet50(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = resnet50.ResNet50(include_top=(not transfer))
         # xception
         elif model_name == 'xception':
             import keras.applications.xception as xception
             self.lib = xception
-            if input_shape == None:
-                self.input_size = (299, 299)
-                self.model = xception.Xception(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (299, 299)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = xception.Xception(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = xception.Xception(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (299, 299)
+                self.model = xception.Xception(include_top=(not transfer))
         # densenet121
         elif model_name == 'densenet121':
             import keras.applications.densenet as densenet
             self.lib = densenet
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = densenet.DenseNet121(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = densenet.DenseNet121(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = densenet.DenseNet121(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = densenet.DenseNet121(include_top=(not transfer))
         # densenet169
         elif model_name == 'densenet169':
             import keras.applications.densenet as densenet
             self.lib = densenet
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = densenet.DenseNet169(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = densenet.DenseNet169(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = densenet.DenseNet169(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = densenet.DenseNet169(include_top=(not transfer))
         # densenet201
         elif model_name == 'densenet201':
             import keras.applications.densenet as densenet
             self.lib = densenet
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = densenet.DenseNet201(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = densenet.DenseNet201(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = densenet.DenseNet201(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = densenet.DenseNet201(include_top=(not transfer))
         # inceptionResnetV2
         elif model_name == 'inception_resnet_v2':
             import keras.applications.inception_resnet_v2 as inception_resnet_v2
             self.lib = inception_resnet_v2
-            if input_shape == None:
-                self.input_size = (299, 299)
-                self.model = self.lib.InceptionResNetV2(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (299, 299)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.InceptionResNetV2(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.InceptionResNetV2(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (299, 299)
+                self.model = self.lib.InceptionResNetV2(include_top=(not transfer))
         # inceptionV3
         elif model_name == 'inception_v3':
             import keras.applications.inception_v3 as inception_v3
             self.lib = inception_v3
-            if input_shape == None:
-                self.input_size = (299, 299)
-                self.model = self.lib.InceptionV3(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (299, 299)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.InceptionV3(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.InceptionV3(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (299, 299)
+                self.model = self.lib.InceptionV3(include_top=(not transfer))
         # nasnet mobile
         elif model_name == 'nasnet_mobile':
             import keras.applications.nasnet as nasnet
             self.lib = nasnet
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = self.lib.NASNetMobile(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.NASNetMobile(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.NASNetMobile(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = self.lib.NASNetMobile(include_top=(not transfer))
         # nasnet large
         elif model_name == 'nasnet_large':
             import keras.applications.nasnet as nasnet
             self.lib = nasnet
-            if input_shape == None:
-                self.input_size = (331, 331)
-                self.model = self.lib.NASNetLarge(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (331, 331)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.NASNetLarge(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.NASNetLarge(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (331, 331)
+                self.model = self.lib.NASNetLarge(include_top=(not transfer))
         # mobilenet
         elif model_name == 'mobilenet':
             import keras.applications.mobilenet as mobilenet
             self.lib = mobilenet
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = self.lib.MobileNet(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.MobileNet(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.MobileNet(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = self.lib.MobileNet(include_top=(not transfer))
         # mobilenet v2
         elif model_name == 'mobilenet_v2':
             import keras.applications.mobilenet_v2 as mobilenet_v2
             self.lib = mobilenet_v2
-            if input_shape == None:
-                self.input_size = (224, 224)
-                self.model = self.lib.MobileNetV2(include_top=include_last_fc)
+            if transfer:
+                if input_shape == None:
+                    self.input_size = (224, 224)
+                    input_shape = (self.input_size[0], self.input_size[1], 3)
+                else:
+                    self.input_size = (input_shape[0], input_shape[1])
+                self.model = self.lib.MobileNetV2(include_top=(not transfer), input_shape=input_shape)
             else:
-                self.input_size = (input_shape[0], input_shape[1])
-                self.model = self.lib.MobileNetV2(include_top=include_last_fc, input_shape=input_shape)
+                self.input_size = (224, 224)
+                self.model = self.lib.MobileNetV2(include_top=(not transfer))
     
     def add_layers(self, layers):
         '''
@@ -245,9 +298,9 @@ def load_pretrained():
 def transfer():
     # create transfer model
     from keras.layers import GlobalAveragePooling2D, Dense
-    m = PreTrainedModelHelper('mobilenet_v2', False, (224,224,3))
+    m = PreTrainedModelHelper('mobilenet_v2', True)
     m.add_layers([GlobalAveragePooling2D(), Dense(3, activation='softmax')])
-    m.freeze(3)
+    m.freeze(10)
     m.model.compile(loss='categorical_crossentropy', optimizer='adam')
     # training
     img = m.lib.preprocess_input(m.img_to_input(m.img_to_np('./mug.jpg', m.input_size)))
