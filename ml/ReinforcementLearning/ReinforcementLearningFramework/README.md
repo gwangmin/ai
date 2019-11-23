@@ -1,4 +1,4 @@
-deprecated
+**deprecated**
 
 Deep Reinforcement Learning Toolkit v1.0.6
 ===========================================
