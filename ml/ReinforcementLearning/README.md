@@ -1,12 +1,10 @@
-deprecated
-
 # ReinforcementLearning
 Repository for Reinforcement Learning
   
   
   
 ## Directories
-* ReinforcementLearningFramework: Deep Reinforcement Learning Toolkit (package)
+* ReinforcementLearningFramework: (deprecated)Deep Reinforcement Learning Toolkit (package)
 
 ## Files
 * .gitignore: Ignore this file
