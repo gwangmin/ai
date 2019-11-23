@@ -1,3 +1,5 @@
+deprecated
+
 Deep Reinforcement Learning Toolkit v1.0.6
 ===========================================
 * This toolkit provides Deep Reinforcement Learning agents.
