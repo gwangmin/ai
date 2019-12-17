@@ -30,5 +30,3 @@ Deep Reinforcement Learning Toolkit v1.0.6
 ### For trace(drlt.trace)
 * Env_wapper() in drlt/trace/Env_wrapper.py
 
-
-[한국어 간단 설명](https://gwangmin.github.io/intro/2018/05/20/drlt.html)
