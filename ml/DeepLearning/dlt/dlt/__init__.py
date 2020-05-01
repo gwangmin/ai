@@ -1,2 +1,2 @@
-from . import dnn, plot, callbacks, ae
+from . import dnn, plot, callbacks, ae, preprocessing
 
